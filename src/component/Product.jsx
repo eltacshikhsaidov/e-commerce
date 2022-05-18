@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addProductToCart, deleteProductFromCart } from '../redux/action/index';
+import { addProductToCart } from '../redux/action/index';
 import Skeleton from 'react-loading-skeleton';
 import { NavLink, useParams } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const Product = () => {
             setLoading(false);
         }
         getProduct();
-    }, []);
+    });
 
     const Loading = () => {
         return (
