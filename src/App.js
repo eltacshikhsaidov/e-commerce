@@ -3,8 +3,8 @@ import './App.css';
 import Cart from './component/Cart';
 import Home from './component/Home';
 import Navbar from './component/Navbar';
-import Product from './component/Product';
-import Products from './component/Products';
+import Product from './component/product/Product';
+import Products from './component/products/Products';
 
 function App() {
   return (

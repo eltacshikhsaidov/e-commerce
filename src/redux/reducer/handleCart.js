@@ -1,3 +1,5 @@
+import * as actionTypes from '../action/action-types/actionTypes';
+
 const cart = [];
 
 const handleCart = (state = cart, action) => {
@@ -5,7 +7,7 @@ const handleCart = (state = cart, action) => {
     const product = action.payload;
 
     switch (action.type) {
-        case 'ADD_PRODUCT_TO_CART':
+        case actionTypes.ADD_TO_CART:
             // Check if product already exists in cart
             const productExists = state.find(item => item.id === product.id);
 
@@ -22,7 +24,7 @@ const handleCart = (state = cart, action) => {
                 return [...state, { ...product, quantity: 1 }];
             }
             break;
-        case 'DELETE_PRODUCT_FROM_CART':
+        case actionTypes.REMOVE_FROM_CART:
             // Check if product exists in cart
             const productExistsInCart = state.find(item => item.id === product.id);
 

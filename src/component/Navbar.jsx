@@ -7,6 +7,8 @@ const Navbar = () => {
 
     const state = useSelector((state) => state.handleCart);
 
+    console.log(state);
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-white py-3 shadow-sm">
@@ -33,6 +35,7 @@ const Navbar = () => {
                                 <NavLink className="nav-link" to="contact">Contact</NavLink>
                             </li>
                         </ul>
+
 
                         <div className="buttons">
                             <NavLink to="/login" className="btn btn-outline-dark">
