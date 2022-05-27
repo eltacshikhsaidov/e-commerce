@@ -12,3 +12,6 @@ code {
     monospace;
 }
 
+.hover-light-gray:hover {
+  background-color:rgb(247, 247, 247)
+}

@@ -23,7 +23,6 @@ const handleCart = (state = cart, action) => {
                 // If product does not exist, add it to cart
                 return [...state, { ...product, quantity: 1 }];
             }
-            break;
         case actionTypes.REMOVE_FROM_CART:
             // Check if product exists in cart
             const productExistsInCart = state.find(item => item.id === product.id);
@@ -41,10 +40,8 @@ const handleCart = (state = cart, action) => {
                 // If product does not exist, return cart
                 return state;
             }
-            break;
         default:
             return state;
-            break;
     }
 }
 

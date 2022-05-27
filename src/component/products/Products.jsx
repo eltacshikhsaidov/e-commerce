@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { NavLink } from 'react-router-dom';
 import Loading from './Loading';
 import ShowProducts from './ShowProducts';
 
@@ -10,7 +8,7 @@ const Products = () => {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(data);
     const [loading, setLoading] = useState(false);
-    let isComponentMounted = true;
+    const [isComponentMounted, setIsComponentMounted] = useState(true);
 
     useEffect(() => {
 
@@ -22,18 +20,17 @@ const Products = () => {
                 setData(await response.clone().json());
                 setFilter(await response.json());
                 setLoading(false);
-                console.log(filter);
             }
 
             return () => {
-                isComponentMounted = false;
+                setIsComponentMounted(false);
             }
         }
 
         getProducts();
 
 
-    }, []);
+    }, [isComponentMounted]);
 
     const filterProduct = (category) => {
         const updateList = data.filter(item => item.category === category);
