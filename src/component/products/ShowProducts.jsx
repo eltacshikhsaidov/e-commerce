@@ -4,7 +4,7 @@ const ShowProducts = ({data, setFilter, filterProduct, filter}) => {
 
     return (
         <>
-            <div className="buttons d-flex justify-content-center pb-5 mt-1">
+            <div className="scroll-row buttons d-flex justify-content-center pb-5 mt-1">
                 <button className="btn btn-outline-dark ms-1" onClick={() => setFilter(data)}>
                     All
                 </button>
@@ -14,10 +14,10 @@ const ShowProducts = ({data, setFilter, filterProduct, filter}) => {
                 <button className="btn btn-outline-dark ms-1" onClick={() => filterProduct('women\'s clothing')}>
                     Women's clothing
                 </button>
-                <button className="btn btn-outline-dark ms-1" onClick={() => filterProduct('jewelery')}>
+                <button className="btn btn-outline-dark ms-1 wp" onClick={() => filterProduct('jewelery')}>
                     Jewelery
                 </button>
-                <button className="btn btn-outline-dark ms-1" onClick={() => filterProduct('electronics')}>
+                <button className="btn btn-outline-dark ms-1 wp" onClick={() => filterProduct('electronics')}>
                     Electronic
                 </button>
             </div>

@@ -23,10 +23,10 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
     }
 
     return (
-        <>
+        <div className="text-center d-flex flex-wrap">
 
             <div className="col-md-6">
-                <img src={product.image} alt={product.title} height='400px' width='400px' />
+                <img className="mwi" src={product.image} alt={product.title} height='400px' width='400px' />
             </div>
             <div className="col-md-6 bg-light-border">
                 <h4 className='text-uppercase text-black-50'>
@@ -68,7 +68,7 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
                 </NavLink>
             </div>
 
-        </>
+        </div>
     );
 }
 
