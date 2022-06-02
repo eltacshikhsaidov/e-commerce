@@ -8,6 +8,9 @@ import Home from './component/Home';
 import Navbar from './component/Navbar';
 import Product from './component/product/Product';
 import Products from './component/products/Products';
+import Dashboard from './component/admin/Dashboard';
+import Login from './component/Login';
+import Register from './component/Register';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </>
   );
