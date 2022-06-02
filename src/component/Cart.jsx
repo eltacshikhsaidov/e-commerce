@@ -52,15 +52,15 @@ const Cart = () => {
 
     const cartItems = (cartItem) => {
         return (
-            <div className="row py-4 hover-light-gray mb-2" key={cartItem.id}>
-                <div className="col-3 px-5 py-2">
-                    <img src={cartItem.image} alt={cartItem.name} className="img-fluid" height='150px' width='200px' />
+            <div className="row py-4 hover-light-gray mb-2 text-center" key={cartItem.id}>
+                <div className="col-md-3 px-5 py-2">
+                    <img src={cartItem.image} alt={cartItem.name} className="img-fluid mwi" height='150px' width='200px' />
                 </div>
-                <div className="col-5 px-5 py-5">
+                <div className="col-md-5 px-5 py-4">
                     <h5 className="fw-bold">{cartItem.title}</h5>
                     <p className="fs-14">{cartItem.description}</p>
                 </div>
-                <div className="col-4 px-5 py-5">
+                <div className="col-md-1 px-5">
                     <h5 className="fw-bold">${cartItem.price}</h5>
                     <h5 className="fw-bold"><i className='fa fa-star' style={{ color: 'orange' }}></i> {cartItem.rating.rate} ({cartItem.rating.count})</h5>
                     {quantity(cartItem) === 1 && <button className="btn btn-outline-danger" onClick={() => removeProduct(cartItem)}>Remove</button>}
@@ -94,7 +94,7 @@ const Cart = () => {
         return (
             <div className="container">
                 <div className="row">
-                    <NavLink to='/checkout' className='btn btn-dark px-3 py-2 w-25 mx-auto'>Proceed to Checkout</NavLink>
+                    <NavLink to='/checkout' className='btn btn-dark px-3 w-auto py-2 mx-auto mb-2'>Proceed to Checkout</NavLink>
                 </div>
             </div>
         )
