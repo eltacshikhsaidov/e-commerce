@@ -1,15 +1,45 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFeedback } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
 
 const Dashboard = () => {
 
+    const state = useSelector((state) => state.handleFeedback);
+    const dispatch = useDispatch();
+
+    const removeFeedbackFromState = (feedback) => {
+        dispatch(removeFeedback(feedback));
+        showMessage('Feedback deleted', 'success');
+    }
+
+    const feedbacks = (feedback) => {
+        return (
+            <tr key={feedback.id}>
+                <td>{feedback.fullName}</td>
+                <td>
+                    <a href={'mailto:' + feedback.email}>
+                        {feedback.email}
+                    </a>
+                </td>
+                <td>
+                    {feedback.message}
+                </td>
+                <td>
+                    <button className='btn btn-sm btn-danger mx-3' onClick={() => removeFeedbackFromState(feedback)}><i className='fa fa-trash'></i></button>
+                </td>
+            </tr>
+        );
+    }
 
 
-    const showEdit = () => {
+
+
+    const showMessage = (message, icon) => {
         Swal.fire({
             position: 'center',
-            icon: 'success',
-            title: 'Updated successfully',
+            icon: icon,
+            title: message,
             showConfirmButton: false,
             timer: 1500
         })
@@ -133,7 +163,7 @@ const Dashboard = () => {
                                     <span className='bg-info p-1 rounded text-white'>Available</span>
                                 </td>
                                 <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1' onClick={showEdit}><i className='fa fa-edit'></i></button>
+                                    <button className='btn btn-sm btn-success mx-1' onClick={() => showMessage('Updated succesffully', 'success')}><i className='fa fa-edit'></i></button>
                                     <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
                                 </td>
                             </tr>
@@ -151,7 +181,7 @@ const Dashboard = () => {
                                     <span className='bg-secondary p-1 rounded text-white'>Not available</span>
                                 </td>
                                 <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1' onClick={showEdit}><i className='fa fa-edit'></i></button>
+                                    <button className='btn btn-sm btn-success mx-1' onClick={() => showMessage('Updated succesffully', 'success')}><i className='fa fa-edit'></i></button>
                                     <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
                                 </td>
                             </tr>
@@ -256,6 +286,30 @@ const Dashboard = () => {
                         </tbody>
                     </table>
                 </div>
+
+                {/* Show all feedbacks */}
+                <div className='col-md-12 my-5'>
+                    <h3>Feedbacks</h3>
+                    <table className='table table-striped'>
+                        <thead>
+                            <tr>
+                                <th>Full name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* get all feedbacks from database */}
+                            {/* display all feedbacks */}
+                            {state.map(feedback => feedbacks(feedback))}
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+
+
 
 
             </div>

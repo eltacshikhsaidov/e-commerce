@@ -18,3 +18,19 @@ export const deleteProductFromCart = (product) => {
         payload: product
     };
 }
+
+// For adding feedback
+export const addFeedback = (feedback) => {
+    return {
+        type: actionTypes.ADD_FEEDBACK,
+        payload: feedback
+    };
+}
+
+//  remove feedback
+export const removeFeedback = (feedback) => {
+    return {
+        type: actionTypes.REMOVE_FEEBACK,
+        payload: feedback
+    };
+}
