@@ -129,7 +129,9 @@ const Dashboard = () => {
                                 <td>Electronics</td>
                                 <td>This is product 1</td>
                                 <td>100</td>
-                                <td>Available</td>
+                                <td>
+                                    <span className='bg-info p-1 rounded text-white'>Available</span>
+                                </td>
                                 <td className='d-flex'>
                                     <button className='btn btn-sm btn-success mx-1' onClick={showEdit}><i className='fa fa-edit'></i></button>
                                     <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
@@ -145,7 +147,9 @@ const Dashboard = () => {
                                 <td>Electronics</td>
                                 <td>This is product 2</td>
                                 <td>200</td>
-                                <td>Available</td>
+                                <td>
+                                    <span className='bg-secondary p-1 rounded text-white'>Not available</span>
+                                </td>
                                 <td className='d-flex'>
                                     <button className='btn btn-sm btn-success mx-1' onClick={showEdit}><i className='fa fa-edit'></i></button>
                                     <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>

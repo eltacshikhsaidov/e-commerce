@@ -13,8 +13,7 @@ const Checkout = () => {
             position: 'center',
             icon: 'success',
             title: 'Thank you for your order!\nYour order will be delivered in 3-5 business days.',
-            showConfirmButton: true
-            // timer: 1500
+            showConfirmButton: true,
         })
     }
 
