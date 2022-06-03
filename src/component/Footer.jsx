@@ -1,8 +1,45 @@
 import React from 'react'
 
 const Footer = () => {
+
+
+    // get real time scroll position
+    const [scrollPosition, setScrollPosition] = React.useState(0)
+
+    // get real time scroll position
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    const handleScroll = () => {
+        setScrollPosition(window.scrollY)
+    }
+
+    const scrollToTopClick = () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+
+
     return (
         <footer className="text-center text-lg-start bg-light text-muted">
+
+            {/* back to top button */}
+            {scrollPosition > 100 &&
+                <button
+                    type="button"
+                    className="btn btn-outline-dark btn-floating btn-lg rounded-circle"
+                    id="btn-back-to-top"
+                    onClick={scrollToTopClick}
+                >
+                    <i className="fa fa-arrow-up"></i>
+                </button>
+            }
+
             <section
                 className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
             >
@@ -94,7 +131,7 @@ const Footer = () => {
                 </div>
             </section>
 
-            <div className="text-center p-4" style={{backgroundColor: 'rgba(0, 0, 0, 0.05)'}}>
+            <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
                 © 2021 Copyright:
                 <a className="text-reset fw-bold" href="https://www.e-commerce.netlify.app/">eStore</a>
             </div>

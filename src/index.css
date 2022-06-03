@@ -16,6 +16,12 @@ code {
   background-color:rgb(247, 247, 247)
 }
 
+#btn-back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  display: block;
+}
 
 .scroll-row {
   overflow-x: auto;
