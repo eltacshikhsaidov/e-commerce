@@ -233,13 +233,13 @@ const Dashboard = () => {
                                 <td>1</td>
                                 <td>User 1</td>
                                 <td>
-                                    <a href='#'>
+                                    <a href='mailto:e@gmail.com'>
                                         e@gmail.com
                                     </a>
                                 </td>
                                 <td>0123456789</td>
                                 <td>
-                                    <a href='#'>
+                                    <a href='/address1'>
                                         Address 1
                                     </a>
                                 </td>
