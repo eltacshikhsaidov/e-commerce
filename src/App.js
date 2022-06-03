@@ -11,6 +11,7 @@ import Products from './component/products/Products';
 import Dashboard from './component/admin/Dashboard';
 import Login from './component/Login';
 import Register from './component/Register';
+import Footer from './component/Footer';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Routes>
+      <Footer />
     </>
   );
 }
