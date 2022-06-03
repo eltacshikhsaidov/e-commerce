@@ -14,8 +14,9 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white py-3 shadow-sm">
 
                 {/* <a className="navbar-brand" href="#">eStore</a> */}
-                <NavLink className={'navbar-brand'} to='/'>
-                    <img src={'/assets/logo.png'} alt="Navbar Logo" width='100px' height='50px' />
+                <NavLink className={'navbar-brand mx-2'} to='/'>
+                    <img src={'/assets/logo.png'} alt="Navbar Logo" width='57px' height='50px' />
+                    <span>eStore</span>
                 </NavLink>
 
                 <button className="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
