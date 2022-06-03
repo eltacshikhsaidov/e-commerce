@@ -69,7 +69,7 @@ const Checkout = () => {
 
     const checkoutItems = (checkoutItem) => {
         return (
-            <tr className='align-middle'>
+            <tr className='align-middle' key={checkoutItem.id}>
                 <td>
                     <img className='mx-3 my-2' src={checkoutItem.image} alt={checkoutItem.title} height='100px' />
                 </td>
