@@ -15,20 +15,35 @@ const Dashboard = () => {
 
     const feedbacks = (feedback) => {
         return (
-            <tr key={feedback.id}>
-                <td>{feedback.fullName}</td>
-                <td>
-                    <a href={'mailto:' + feedback.email}>
-                        {feedback.email}
-                    </a>
-                </td>
-                <td>
-                    {feedback.message}
-                </td>
-                <td>
-                    <button className='btn btn-sm btn-danger mx-3' onClick={() => removeFeedbackFromState(feedback)}><i className='fa fa-trash'></i></button>
-                </td>
-            </tr>
+
+            <div id='accrodion'>
+                <div className="card">
+                    <div className="card-header" id='hello'>
+                        <h5 className="mb-0">
+                            <button className="btn btn-link" data-toggle="collapse" data-target="#world" aria-expanded="true" aria-controls="collapseOne">
+                                Feedback by {feedback.fullName}
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id='world' className="collapse show" aria-labelledby="headingOne" data-parent='#accordion'>
+                        <div className="card-body">
+                            <div className='columns'>
+                                <div className='column'>
+                                    <h5>
+                                        Feedback sent by {feedback.email}
+                                    </h5>
+                                    <p>
+                                        {feedback.message}
+                                    </p>
+                                    <button className='btn btn-sm btn-danger mx-3' onClick={() => removeFeedbackFromState(feedback)}><i className='fa fa-trash'></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         );
     }
 
@@ -132,180 +147,150 @@ const Dashboard = () => {
                 {/* show all availabel products */}
                 <div className='col-md-12 mt-5'>
                     <h3>Available Products</h3>
-                    <table className='table table-striped'>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>Product Price</th>
-                                <th>Product Image</th>
-                                <th>Product Category</th>
-                                <th>Product Description</th>
-                                <th>Product Quantity</th>
-                                <th>Product Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* get all products from database */}
-                            {/* display all products */}
-                            <tr>
-                                <td>1</td>
-                                <td>Product 1</td>
-                                <td>$100</td>
-                                <td>
-                                    <img src='/assets/product.png' alt='product' height='100px' width='100px' />
-                                </td>
-                                <td>Electronics</td>
-                                <td>This is product 1</td>
-                                <td>100</td>
-                                <td>
-                                    <span className='bg-info p-1 rounded text-white'>Available</span>
-                                </td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1' onClick={() => showMessage('Updated succesffully', 'success')}><i className='fa fa-edit'></i></button>
-                                    <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Product 2</td>
-                                <td>$200</td>
-                                <td>
-                                    <img src='/assets/product.png' alt='product' height='100px' width='100px' />
-                                </td>
-                                <td>Electronics</td>
-                                <td>This is product 2</td>
-                                <td>200</td>
-                                <td>
-                                    <span className='bg-secondary p-1 rounded text-white'>Not available</span>
-                                </td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1' onClick={() => showMessage('Updated succesffully', 'success')}><i className='fa fa-edit'></i></button>
-                                    <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="accordion">
+                        <div className="card">
+                            <div className="card-header" id="headingOne">
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Product Title, quantity
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div className="card-body">
+                                    {/* create row with product details */}
+                                    <div className='columns'>
+                                        <div className='column'>
+                                            <h5>
+                                                Product Title <button className='btn btn-sm btn-info mx-3'>Available</button>
+                                                <button className='btn btn-sm btn-warning mx-3'>Quantity: 1</button>
+                                            </h5>
+                                            <div className='d-flex'>
+                                                <p className='m-2'>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                    Aperiam, doloremque, ea.
+                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore, asperiores. Aspernatur voluptates beatae quos recusandae, id neque omnis error optio aliquid obcaecati vero. Veniam, veritatis doloribus laborum totam eveniet odio!
+
+                                                </p>
+                                                <img src='https://via.placeholder.com/150' alt='product' />
+                                            </div>
+                                            {/* product is available */}
+                                            <div className='d-flex'>
+                                                <button className='btn btn-sm btn-success mx-3'>update</button>
+                                                <button className='btn btn-sm btn-danger mx-3'>remove</button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* show all orders */}
                 <div className='col-md-12 mt-5'>
                     <h3>Orders</h3>
-                    <table className='table table-striped'>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Order Name</th>
-                                <th>Order Price</th>
-                                <th>Order Image</th>
-                                <th>Order Category</th>
-                                <th>Order Description</th>
-                                <th>Order Quantity</th>
-                                <th>Order Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* get all orders from database */}
-                            {/* display all orders */}
-                            <tr>
-                                <td>1</td>
-                                <td>Order 1</td>
-                                <td>$100</td>
-                                <td>
-                                    <img src='/assets/product.png' alt='product' height='100px' width='100px' />
-                                </td>
-                                <td>Electronics</td>
-                                <td>This is product 1</td>
-                                <td>100</td>
-                                <td>Available</td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1'><i className='fa fa-edit'></i></button>
-                                    <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Order 2</td>
-                                <td>$200</td>
-                                <td>
-                                    <img src='/assets/product.png' alt='product' height='100px' width='100px' />
-                                </td>
-                                <td>Electronics</td>
-                                <td>This is product 2</td>
-                                <td>200</td>
-                                <td>Available</td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1'><i className='fa fa-edit'></i></button>
-                                    <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="accordion">
+                        <div className="card">
+                            <div className="card-header" id="headingOne">
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+                                        Order ID #238092380
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne1" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div className="card-body">
+                                    {/* create row with product details */}
+                                    <div className='columns'>
+                                        <div className='column'>
+                                            <h5>
+                                                Product Title <button className='btn btn-sm btn-info mx-3'>Available</button>
+                                                <button className='btn btn-sm btn-warning mx-3'>Quantity: 1</button>
+                                            </h5>
+                                            <div className='d-flex'>
+                                                <p className='my-1'>
+                                                    Username: Eltac Shikhsaidov <br></br>
+                                                    Phone: +994 70 260 62 86 <br></br>
+                                                    Email: hello@world.com <br></br>
+                                                    Address: Baku, Azerbaijan <br></br>
+
+                                                </p>
+                                                <img src='https://via.placeholder.com/150' alt='product' />
+                                            </div>
+                                            {/* product is available */}
+                                            <div className='d-flex'>
+                                                <button className='btn btn-sm btn-success mx-3'>update</button>
+                                                <button className='btn btn-sm btn-danger mx-3'>remove</button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* show all users */}
                 <div className='col-md-12 mt-5'>
                     <h3>Users</h3>
-                    <table className='table table-striped'>
-                        <thead>
-                            <tr>
-                                <th>User ID</th>
-                                <th>User Name</th>
-                                <th>User Email</th>
-                                <th>User Phone</th>
-                                <th>User Address</th>
-                                <th>User Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* get all users from database */}
-                            {/* display all users */}
-                            <tr>
-                                <td>1</td>
-                                <td>User 1</td>
-                                <td>
-                                    <a href='mailto:e@gmail.com'>
-                                        e@gmail.com
-                                    </a>
-                                </td>
-                                <td>0123456789</td>
-                                <td>
-                                    <a href='/address1'>
-                                        Address 1
-                                    </a>
-                                </td>
-                                <td>Admin</td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-sm btn-success mx-1'><i className='fa fa-edit'></i></button>
-                                    <button className='btn btn-sm btn-danger'><i className='fa fa-trash'></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="accordion">
+                        <div className="card">
+                            <div className="card-header" id="headingOne3">
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
+                                        Eltac Shikhsaidov
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne3" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div className="card-body">
+                                    {/* create row with product details */}
+                                    <div className='columns'>
+                                        <div className='column'>
+                                            <h5>
+                                                Role <button className='btn btn-sm btn-info mx-3'>ADMIN</button>
+                                            </h5>
+                                            <div className='d-flex m-3'>
+                                                <p className='m-2'>
+                                                    
+                                                    Hello world
+
+                                                </p>
+                                                <img className='rounded-circle' src='https://via.placeholder.com/50' alt='product' />
+                                            </div>
+                                            {/* product is available */}
+                                            <div className='d-flex'>
+                                                <button className='btn btn-sm btn-success mx-3'>update</button>
+                                                <button className='btn btn-sm btn-danger mx-3'>remove</button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Show all feedbacks */}
                 <div className='col-md-12 my-5'>
                     <h3>Feedbacks</h3>
-                    <table className='table table-striped'>
-                        <thead>
-                            <tr>
-                                <th>Full name</th>
-                                <th>Email</th>
-                                <th>Message</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* get all feedbacks from database */}
-                            {/* display all feedbacks */}
-                            {state.map(feedback => feedbacks(feedback))}
-                            
-                        </tbody>
-                    </table>
+                    {/* get all feedbacks from database */}
+                    {/* display all feedbacks */}
+                    {state.length > 0 ?
+                        state.map(feedback => feedbacks(feedback))
+                        :
+                        <p>No feedbacks</p>
+                    }
                 </div>
 
 

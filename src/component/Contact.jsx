@@ -10,7 +10,7 @@ const Contact = () => {
     const addFeedbackToState = (feedback) => {
         setFeedback({
             ...feedback,
-            id: new Date().getTime(),
+            // id: new Date().getTime()
         })
         dispatch(addFeedback(feedback));
         showSuccess('Thank you for your message', 'success');
@@ -22,7 +22,6 @@ const Contact = () => {
     }
 
     const [feedback, setFeedback] = useState({
-        id: 0,
         fullName: '',
         email: '',
         message: '',
@@ -66,7 +65,7 @@ const Contact = () => {
                 </div>
                 <div className="row">
                     <div className="col-md 5 d-flex justify-content-center">
-                        <img src="/assets/contact.png" alt="Contact Us" height="400px" width="600px" />
+                        <img src="/assets/contact.png" alt="Contact Us" className='img-fluid' />
                     </div>
                     <div className="col-md 6">
                         <form onSubmit={e => e.preventDefault()}>
