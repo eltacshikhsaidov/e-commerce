@@ -64,7 +64,7 @@ const Navbar = () => {
                         }
 
                         {
-                            isAuthenticated &&
+                            isAuthenticated && user.email === 'eltac.shixseyidov250301@gmail.com' &&
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
                             </li>
