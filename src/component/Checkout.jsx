@@ -86,7 +86,7 @@ const Checkout = () => {
 
 
                 </td>
-                <td>{checkoutItem.price * quantity(checkoutItem)}</td>
+                <td>{checkoutItem.price.toFixed(2) * quantity(checkoutItem)}</td>
             </tr>
         );
     }
@@ -109,7 +109,7 @@ const Checkout = () => {
                                 <div className="col-12">
                                     <h3 className="text-center">
                                         <i className="fa fa-shopping-cart mx-2"></i>
-                                        Your Cart (total amount: {totalAmount()}$)
+                                        Your Cart (total amount: {totalAmount().toFixed(2)}$)
                                     </h3>
                                     <hr />
                                 </div>
