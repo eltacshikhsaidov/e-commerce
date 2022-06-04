@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import React from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
-const ShowProducts = ({data, setFilter, filterProduct, filter}) => {
+const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
+
+    const { loginWithRedirect, isAuthenticated } = useAuth0();
 
     return (
         <>
@@ -24,7 +27,7 @@ const ShowProducts = ({data, setFilter, filterProduct, filter}) => {
             </div>
             {filter.map((product) => {
                 return (
-                    <React.Fragment key={product.id}>  
+                    <React.Fragment key={product.id}>
                         <div className="col-md-3 mb-4">
                             <div className="card h-100 text-center p-4">
                                 <img src={product.image} className="card-img-top" alt={product.title} height='250px' />
@@ -36,7 +39,14 @@ const ShowProducts = ({data, setFilter, filterProduct, filter}) => {
                                     <p className="card-text lead fw-bold">
                                         ${product.price}
                                     </p>
-                                    <NavLink to={`/products/${product.id}`} className="btn btn-outline-dark">Buy now</NavLink>
+                                    {
+                                        isAuthenticated ?
+                                            <NavLink to={`/products/${product.id}`} className="btn btn-outline-dark">Buy now</NavLink>
+                                            :
+                                            <button className="btn btn-outline-dark" onClick={() => loginWithRedirect()}>
+                                                Buy now
+                                            </button>
+                                    }
                                 </div>
                             </div>
                         </div>

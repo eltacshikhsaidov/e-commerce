@@ -1,6 +1,11 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 const Footer = () => {
+
+    const { isAuthenticated } = useAuth0();
 
 
     // get real time scroll position
@@ -21,6 +26,18 @@ const Footer = () => {
     const scrollToTopClick = () => {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+    }
+
+    // show help alert
+    const showHelpAlert = () => {
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'Help',
+            text: 'If you have any question, message us on by clicking \n on the message icon on the bottom right corner.',
+            showConfirmButton: true,
+            // timer: 1500
+        })
     }
 
 
@@ -84,16 +101,16 @@ const Footer = () => {
                                 Products
                             </h6>
                             <p>
-                                <a href="mens" className="text-reset">Men's clothes</a>
+                                <NavLink className="text-reset" to="products">Men's clothes</NavLink>
                             </p>
                             <p>
-                                <a href="womens" className="text-reset">Women's clothes</a>
+                                <NavLink className="text-reset" to="products">Women's clothes</NavLink>
                             </p>
                             <p>
-                                <a href="electronics" className="text-reset">Electronics</a>
+                                <NavLink className="text-reset" to="products">Electronics</NavLink>
                             </p>
                             <p>
-                                <a href="all" className="text-reset">All</a>
+                                <NavLink className="text-reset" to="products">All</NavLink>
                             </p>
                         </div>
 
@@ -102,16 +119,19 @@ const Footer = () => {
                                 Useful links
                             </h6>
                             <p>
-                                <a href="/about" className="text-reset">About</a>
+                                <NavLink className="text-reset" to="about">About</NavLink>
+                            </p>
+                            {
+                                isAuthenticated &&
+                                <p>
+                                    <NavLink className="text-reset" to="contact">Contact</NavLink>
+                                </p>
+                            }
+                            <p>
+                                <NavLink className="text-reset" to="products">Products</NavLink>
                             </p>
                             <p>
-                                <a href="/contact" className="text-reset">Contact</a>
-                            </p>
-                            <p>
-                                <a href="/products" className="text-reset">Products</a>
-                            </p>
-                            <p>
-                                <a href="/help" className="text-reset">Help</a>
+                                <NavLink className="text-reset" to={'/'} onClick={showHelpAlert}>Help</NavLink>
                             </p>
                         </div>
 

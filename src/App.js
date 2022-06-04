@@ -9,11 +9,16 @@ import Navbar from './component/Navbar';
 import Product from './component/product/Product';
 import Products from './component/products/Products';
 import Dashboard from './component/admin/Dashboard';
-import Login from './component/Login';
-import Register from './component/Register';
+// import Login from './component/Login';
+// import Register from './component/Register';
 import Footer from './component/Footer';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
+
+  const { user } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+
   return (
     <>
       <Navbar />
@@ -21,13 +26,24 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<Product />} />
-        <Route path='/cart' element={<Cart />} />
         <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/checkout' element={<Checkout />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+
+        {
+          isAuthenticated &&
+          <>
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/checkout' element={<Checkout />} />
+            <Route path='/contact' element={<Contact />} />
+          </>
+        }
+
+        {
+          user && user.email === 'eltac.shixseyidov250301@gmail.com' &&
+          <Route path='/dashboard' element={<Dashboard />} />
+        }
+
+        {/* <Route path='/login' element={<Login />} /> */}
+        {/* <Route path='/register' element={<Register />} /> */}
       </Routes>
       <Footer />
     </>

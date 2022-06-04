@@ -10,14 +10,14 @@ const Contact = () => {
     const addFeedbackToState = (feedback) => {
         setFeedback({
             ...feedback,
-            id: new Date().getTime()
+            id: new Date().getTime(),
         })
         dispatch(addFeedback(feedback));
         showSuccess('Thank you for your message', 'success');
         setFeedback({
             fullName: '',
             email: '',
-            message: ''
+            message: '',
         })
     }
 

@@ -1,9 +1,15 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 
 const Navbar = () => {
+
+    // CONFIGURING LOGIN/LOGOUT BUTTON
+    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { logout } = useAuth0();
+    const { user } = useAuth0();
 
     const state = useSelector((state) => state.handleCart);
 
@@ -33,25 +39,65 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="about">About</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="contact">Contact</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
-                        </li>
+
+                        {
+                            isAuthenticated &&
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="contact">Contact</NavLink>
+                            </li>
+                        }
+
+                        {
+                            isAuthenticated &&
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
+                            </li>
+                        }
+
                     </ul>
 
-                    <div className="buttons">
-                        <NavLink to="/login" className="btn btn-outline-dark">
-                            <i className="fa fa-sign-in me-1"></i> Login
-                        </NavLink>
-                        <NavLink to="/register" className="btn btn-outline-dark ms-2">
-                            <i className="fa fa-user-plus me-1"></i> Register
-                        </NavLink>
-                        <NavLink to="/cart" className="btn btn-outline-dark ms-2">
-                            <i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})
-                        </NavLink>
-                    </div>
+                    {!isAuthenticated &&
+                        <div className="buttons">
+
+                            <button className="btn btn-outline-dark" onClick={() => loginWithRedirect()}>
+                                <i className="fa fa-sign-in me-1"></i> Login
+                            </button>
+
+                        </div>
+                    }
+
+                    {isAuthenticated &&
+                        <div className="buttons">
+
+                            <div className="dropdown">
+                                <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src={user.picture} alt="profile" className="rounded-circle mx-3" width="40px" height="40px" /> {user.given_name || user.name}
+                                </button>
+                                <div className="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                                    {/* add email verified  */}
+                                    <button className='dropdown-item text-info'>
+                                        <i className="fa fa-user-circle me-1"></i> {user.given_name || user.name}
+                                    </button>
+                                    <button className='dropdown-item text-secondary'>
+                                        <i className="fa fa-envelope me-1"></i> {user.email.substring(0, 4)}...
+                                    </button>
+                                    <button className='dropdown-item text-success'>
+                                        {/* verified email */}
+                                        <i className="fa fa-check-circle me-1"></i> Verified
+                                    </button>
+
+                                    <NavLink to="/cart" className="dropdown-item">
+                                        <i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})
+                                    </NavLink>
+
+                                    <button className='dropdown-item text-danger' onClick={() => logout()}>
+                                        <i className="fa fa-sign-out me-1"></i> Logout
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
                 </div>
             </nav>
         </div>
