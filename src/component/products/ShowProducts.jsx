@@ -1,10 +1,21 @@
 import { NavLink } from "react-router-dom";
 import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
 
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { isAuthenticated } = useAuth0();
+
+    const showLoginAlert = () => {
+        Swal.fire({
+            icon: 'info',
+            title: 'Login Required',
+            text: 'Please login to continue.',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
     return (
         <>
@@ -43,7 +54,7 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                         isAuthenticated ?
                                             <NavLink to={`/products/${product.id}`} className="btn btn-outline-dark">Buy now</NavLink>
                                             :
-                                            <button className="btn btn-outline-dark" onClick={() => loginWithRedirect()}>
+                                            <button className="btn btn-outline-dark" onClick={() => showLoginAlert()}>
                                                 Buy now
                                             </button>
                                     }
