@@ -34,3 +34,19 @@ export const removeFeedback = (feedback) => {
         payload: feedback
     };
 }
+
+// for adding to checkout
+export const addToCheckout = (data) => {
+    return {
+        type: actionTypes.ADD_TO_CHECKOUT,
+        payload: data
+    };
+}
+
+// for removing from checkout
+export const removeFromCheckout = (data) => {
+    return {
+        type: actionTypes.REMOVE_FROM_CHECKOUT,
+        payload: data
+    };
+}

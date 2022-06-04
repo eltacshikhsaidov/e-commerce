@@ -1,12 +1,31 @@
-import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { addProductToCart, deleteProductFromCart } from '../redux/action/listActions';
+import { addProductToCart, addToCheckout, deleteProductFromCart } from '../redux/action/listActions';
 
 const Checkout = () => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state.handleCart);
+    const { user } = useAuth0();
+
+    // add all data to state
+    const [data, setData] = useState({
+        id: new Date().getTime(),
+        user: user,
+        fullName: '',
+        email: '',
+        phone: '',
+        address: '',
+        cardNumber: '',
+        cardExpiration: '',
+        cardCvv: '',
+        cardZip: '',
+        cart: state,
+    });
+
+    // console.log(data);
 
     const orderMessage = () => {
         Swal.fire({
@@ -14,7 +33,40 @@ const Checkout = () => {
             icon: 'success',
             title: 'Thank you for your order!\nYour order will be delivered in 3-5 business days.',
             showConfirmButton: true,
-        })
+            // add button for showing map track a courier
+            confirmButtonText: 'Show courier track',
+            showCancelButton: true,
+            cancelButtonText: 'Close',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    // show the map
+                    title: 'Courier track',
+                    html: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.865010982409!2d106.7641833142898!3d-6.239959794909814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4f8f8f8f8f7%3A0x8f8f8f8f8f8f8f8f!2sJl.+Kartini+No.1%2C+Kec.+Cipadung%2C+Kota+Bandung%2C+Jawa+Barat+40351!5e0!3m2!1sid!2sid!4v1569240981250!5m2!1sid!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>',
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: 'Close',
+
+
+                })
+            }
+        });
+
+        dispatch(addToCheckout(data));
+
+        setData({
+            id: new Date().getTime(),
+            user: user,
+            fullName: '',
+            email: '',
+            phone: '',
+            address: '',
+            cardNumber: '',
+            cardExpiration: '',
+            cardCvv: '',
+            cardZip: '',
+            cart: [],
+        });
     }
 
     const showMessage = (message, icon) => {
@@ -147,19 +199,19 @@ const Checkout = () => {
                                             <hr />
                                             <div className="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, fullName: e.target.value})} value={data.fullName} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Email</label>
-                                                <input type="email" className="form-control" />
+                                                <input onChange={e => setData({...data, email: e.target.value})} value={data.email} type="email" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Phone</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, phone: e.target.value})} value={data.phone} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Address</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, address: e.target.value})} value={data.address} type="text" className="form-control" />
                                             </div>
 
                                         </div>
@@ -171,20 +223,20 @@ const Checkout = () => {
                                             <hr />
                                             <div className="form-group">
                                                 <label htmlFor='cardNumber'>Card Number</label>
-                                                <input type="text" className="form-control" id='cardNumber' />
+                                                <input onChange={e => setData({...data, cardNumber: e.target.value})} value={data.cardNumber} type="text" className="form-control" id='cardNumber' />
                                             </div>
                                             <div className="form-group">
                                                 <label>Expiration Date</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, cardExpiration: e.target.value})} value={data.cardExpiration} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>CVV</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, cardCvv: e.target.value})} value={data.cardCvv} type="text" className="form-control" />
                                             </div>
                                             {/* billing zip code */}
                                             <div className="form-group">
                                                 <label>Billing Zip Code</label>
-                                                <input type="text" className="form-control" />
+                                                <input onChange={e => setData({...data, cardZip: e.target.value})} value={data.cardZip} type="text" className="form-control" />
                                             </div>
                                         </div>
                                         {/* creating order button */}
