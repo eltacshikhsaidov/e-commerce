@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
@@ -14,6 +15,21 @@ const Navbar = () => {
     const state = useSelector((state) => state.handleCart);
 
     console.log(state);
+
+    // show logout success
+    const logoutSuccess = () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Logout Success',
+            text: 'You have successfully logged out.',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        setTimeout(() => {
+            logout();
+        }, 1500);
+    }
 
     return (
         <div>
@@ -78,7 +94,7 @@ const Navbar = () => {
                                     <button className='dropdown-item text-info'>
                                         <i className="fa fa-user-circle me-1"></i> {user.given_name || user.name}
                                     </button>
-                                    <button className='dropdown-item text-secondary'>
+                                    <button className='dropdown-item text-secondary' title={user.email}>
                                         <i className="fa fa-envelope me-1"></i> {user.email.substring(0, 4)}...
                                     </button>
                                     <button className='dropdown-item text-success'>
@@ -90,7 +106,7 @@ const Navbar = () => {
                                         <i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})
                                     </NavLink>
 
-                                    <button className='dropdown-item text-danger' onClick={() => logout()}>
+                                    <button className='dropdown-item text-danger' onClick={() => logoutSuccess()}>
                                         <i className="fa fa-sign-out me-1"></i> Logout
                                     </button>
                                 </div>

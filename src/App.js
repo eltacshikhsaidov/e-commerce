@@ -13,6 +13,7 @@ import Dashboard from './component/admin/Dashboard';
 // import Register from './component/Register';
 import Footer from './component/Footer';
 import { useAuth0 } from '@auth0/auth0-react';
+import NotFound from './component/NotFound';
 
 function App() {
 
@@ -25,7 +26,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<Product />} />
         <Route path='/about' element={<About />} />
 
         {
@@ -34,6 +34,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path="/products/:id" element={<Product />} />
           </>
         }
 
@@ -44,6 +45,9 @@ function App() {
 
         {/* <Route path='/login' element={<Login />} /> */}
         {/* <Route path='/register' element={<Register />} /> */}
+
+        <Route path='*' element={<NotFound />} />
+
       </Routes>
       <Footer />
     </>
