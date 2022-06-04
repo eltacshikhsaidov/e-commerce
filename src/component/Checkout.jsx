@@ -27,7 +27,7 @@ const Checkout = () => {
 
     // console.log(data);
 
-    const orderMessage = () => {
+    const success = () => {
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -65,8 +65,14 @@ const Checkout = () => {
             cardExpiration: '',
             cardCvv: '',
             cardZip: '',
-            cart: [],
+            cart: state,
         });
+    }
+
+    const orderMessage = () => {
+
+        !disableButton() ? success() : showMessage('Please fill all inputs', 'warning');
+
     }
 
     const showMessage = (message, icon) => {
@@ -143,6 +149,15 @@ const Checkout = () => {
         );
     }
 
+    // disable button is input is empty
+    const disableButton = () => {
+        if (data.fullName === '' || data.email === '' || data.phone === '' || data.address === '' || data.cardNumber === '' || data.cardExpiration === '' || data.cardCvv === '' || data.cardZip === '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
 
         // creating checkout page
@@ -199,19 +214,19 @@ const Checkout = () => {
                                             <hr />
                                             <div className="form-group">
                                                 <label>Full Name</label>
-                                                <input onChange={e => setData({...data, fullName: e.target.value})} value={data.fullName} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, fullName: e.target.value })} value={data.fullName} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Email</label>
-                                                <input onChange={e => setData({...data, email: e.target.value})} value={data.email} type="email" className="form-control" />
+                                                <input onChange={e => setData({ ...data, email: e.target.value })} value={data.email} type="email" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Phone</label>
-                                                <input onChange={e => setData({...data, phone: e.target.value})} value={data.phone} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, phone: e.target.value })} value={data.phone} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>Address</label>
-                                                <input onChange={e => setData({...data, address: e.target.value})} value={data.address} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, address: e.target.value })} value={data.address} type="text" className="form-control" />
                                             </div>
 
                                         </div>
@@ -223,27 +238,29 @@ const Checkout = () => {
                                             <hr />
                                             <div className="form-group">
                                                 <label htmlFor='cardNumber'>Card Number</label>
-                                                <input onChange={e => setData({...data, cardNumber: e.target.value})} value={data.cardNumber} type="text" className="form-control" id='cardNumber' />
+                                                <input onChange={e => setData({ ...data, cardNumber: e.target.value })} value={data.cardNumber} type="text" className="form-control" id='cardNumber' />
                                             </div>
                                             <div className="form-group">
                                                 <label>Expiration Date</label>
-                                                <input onChange={e => setData({...data, cardExpiration: e.target.value})} value={data.cardExpiration} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, cardExpiration: e.target.value })} value={data.cardExpiration} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group">
                                                 <label>CVV</label>
-                                                <input onChange={e => setData({...data, cardCvv: e.target.value})} value={data.cardCvv} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, cardCvv: e.target.value })} value={data.cardCvv} type="text" className="form-control" />
                                             </div>
                                             {/* billing zip code */}
                                             <div className="form-group">
                                                 <label>Billing Zip Code</label>
-                                                <input onChange={e => setData({...data, cardZip: e.target.value})} value={data.cardZip} type="text" className="form-control" />
+                                                <input onChange={e => setData({ ...data, cardZip: e.target.value })} value={data.cardZip} type="text" className="form-control" />
                                             </div>
                                         </div>
                                         {/* creating order button */}
                                         <div className="d-flex justify-content-center mt-4">
+
                                             <button type='button' className="btn btn-outline-dark btn-lg px-5" onClick={orderMessage}>
                                                 Order
                                             </button>
+
                                         </div>
                                     </div>
                                 </div>

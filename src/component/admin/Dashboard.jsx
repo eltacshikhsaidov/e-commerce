@@ -160,7 +160,7 @@ const Dashboard = () => {
                                 <p className='card-text'>
                                     {/* get total users from database */}
                                     {/* display total users */}
-                                    12900
+                                    {ordersState.length}
                                 </p>
                             </div>
                             <div className="column my-1 mx-auto">
@@ -290,7 +290,7 @@ const Dashboard = () => {
                                             <div className='d-flex m-3'>
                                                 <p className='m-2'>
 
-                                                    Hello world
+                                                    email: eltac.shixseyidov@gmail.com
 
                                                 </p>
                                                 <img className='rounded-circle' src='https://via.placeholder.com/50' alt='product' />
