@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFeedback } from '../../redux/action/listActions';
+import { removeFeedback, removeFromCheckout } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
 
 const Dashboard = () => {
@@ -8,9 +8,19 @@ const Dashboard = () => {
     const state = useSelector((state) => state.handleFeedback);
     const dispatch = useDispatch();
 
+    // orders
+    const ordersState = useSelector((state) => state.handleCheckout);
+    console.log(ordersState);
+    console.log('feedback state', state);
+
     const removeFeedbackFromState = (feedback) => {
         dispatch(removeFeedback(feedback));
         showMessage('Feedback deleted', 'success');
+    }
+
+    const removeOrderFromState = (order) => {
+        dispatch(removeFromCheckout(order));
+        showMessage('Order removed', 'success');
     }
 
     const feedbacks = (feedback) => {
@@ -44,6 +54,61 @@ const Dashboard = () => {
                 </div>
             </div>
 
+        );
+    }
+
+    const orderedProducts = (orderedProduct) => {
+        return (
+            <h5 key={orderedProduct.id}>
+                {orderedProduct.title.substring(0, 15)+'...'}
+                <button className='btn btn-sm btn-warning mx-3'>Quantity: {orderedProduct.quantity}</button>
+            </h5>
+        );
+    }
+
+    const orders = (order) => {
+        return (
+            <div id="accordion" key={order.id}>
+                <div className="card">
+                    <div className="card-header" id="headingOne">
+                        <h5 className="mb-0">
+                            <button className="btn btn-link" data-toggle="collapse" data-target={'#collapseOne1' + order.id} aria-expanded="true" aria-controls="collapseOne">
+                                Order ID #{order.id} by {order.user.name}
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id={'collapseOne1' + order.id} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div className="card-body">
+                            {/* create row with product details */}
+                            <div className='columns'>
+                                <div className='column'>
+                                    {order.cart.map(orderedProduct => orderedProducts(orderedProduct))}
+                                    <div className='d-flex'>
+                                        <p className='my-1'>
+                                            Username: {order.fullName} <br></br>
+                                            Phone: {order.phone} <br></br>
+                                            Email: {order.email} <br></br>
+                                            Address: {order.address} <br></br>
+
+                                        </p>
+                                        <img src={order.user.picture} alt='user' className='rounded-circle img-fluid' />
+                                    </div>
+                                    {/* product is available */}
+                                    <div className='d-flex'>
+                                        <button className='btn btn-sm btn-danger mx-3' onClick={() => removeOrderFromState(order)}>
+                                            <i className='fa fa-trash mx-1'></i>
+                                            Remove Order
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -193,48 +258,12 @@ const Dashboard = () => {
                 {/* show all orders */}
                 <div className='col-md-12 mt-5'>
                     <h3>Orders</h3>
-                    <div id="accordion">
-                        <div className="card">
-                            <div className="card-header" id="headingOne">
-                                <h5 className="mb-0">
-                                    <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
-                                        Order ID #238092380
-                                    </button>
-                                </h5>
-                            </div>
+                    {
+                        ordersState.length > 0
+                            ? ordersState.map(order => orders(order))
+                            : <p>No orders available</p>
 
-                            <div id="collapseOne1" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div className="card-body">
-                                    {/* create row with product details */}
-                                    <div className='columns'>
-                                        <div className='column'>
-                                            <h5>
-                                                Product Title <button className='btn btn-sm btn-info mx-3'>Available</button>
-                                                <button className='btn btn-sm btn-warning mx-3'>Quantity: 1</button>
-                                            </h5>
-                                            <div className='d-flex'>
-                                                <p className='my-1'>
-                                                    Username: Eltac Shikhsaidov <br></br>
-                                                    Phone: +994 70 260 62 86 <br></br>
-                                                    Email: hello@world.com <br></br>
-                                                    Address: Baku, Azerbaijan <br></br>
-
-                                                </p>
-                                                <img src='https://via.placeholder.com/150' alt='product' />
-                                            </div>
-                                            {/* product is available */}
-                                            <div className='d-flex'>
-                                                <button className='btn btn-sm btn-success mx-3'>update</button>
-                                                <button className='btn btn-sm btn-danger mx-3'>remove</button>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
 
                 {/* show all users */}
@@ -260,7 +289,7 @@ const Dashboard = () => {
                                             </h5>
                                             <div className='d-flex m-3'>
                                                 <p className='m-2'>
-                                                    
+
                                                     Hello world
 
                                                 </p>
