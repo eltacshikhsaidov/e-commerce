@@ -88,7 +88,14 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                 return (
                     <React.Fragment key={product.id}>
                         <div className="col-md-3 mb-4">
-                            <div className="card h-100 text-center p-4">
+                            <div className="card h-100 text-center p-4 fixed-card">
+                                {/* share button on top-right corner */}
+                                <div className="share-button">
+                                    <button className="btn btn-outline-dark rounded-circle" onClick={() => generateQRCode(product)}>
+                                        <i className="fa fa-share-alt"></i>
+                                    </button>
+                                </div>
+
                                 <img src={product.image} className="card-img-top" alt={product.title} height='250px' />
                                 <div className="card-body">
                                     <h5 className="card-title mb-0">{product.title.substring(0, 12)}...</h5>
@@ -154,9 +161,9 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                         <i className="fa fa-heart"></i>
                                     </button>
                                     {/* add share button */}
-                                    <button className="btn btn-outline-dark ml-2" onClick={() => generateQRCode(product)}>
+                                    {/* <button className="btn btn-outline-dark ml-2" onClick={() => generateQRCode(product)}>
                                         <i className="fa fa-share-alt"></i>
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
                         </div>

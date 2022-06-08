@@ -46,3 +46,14 @@ code {
   
 
 }
+
+.fixed-card {
+  position: relative;
+}
+
+.share-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: block;
+}
