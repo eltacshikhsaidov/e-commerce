@@ -12,6 +12,30 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
 
     const state = useSelector(state => state.handleCart);
 
+    const generateQRCode = (product) => {
+
+        const data = `Product name -> ${product.title}\n
+                             Product price -> ${product.price}\n`;
+
+        Swal.fire({
+            title: product.title,
+            imageUrl: 'https://api.qrserver.com/v1/create-qr-code/?data=' + data + '&amp;size=150x150',
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "QR Code",
+            animation: false,
+            showConfirmButton: false,
+            showCloseButton: true,
+            allowOutsideClick: true,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            focusConfirm: false,
+            confirmButtonText: "",
+            confirmButtonAriaLabel: "",
+            confirmButtonColor: "",
+        });
+    }
+
     const showLoginAlert = () => {
         Swal.fire({
             icon: 'info',
@@ -128,6 +152,10 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                         }
                                     }}>
                                         <i className="fa fa-heart"></i>
+                                    </button>
+                                    {/* add share button */}
+                                    <button className="btn btn-outline-dark ml-2" onClick={() => generateQRCode(product)}>
+                                        <i className="fa fa-share-alt"></i>
                                     </button>
                                 </div>
                             </div>

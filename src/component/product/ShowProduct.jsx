@@ -13,12 +13,11 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
 
     const generateQRCode = (product) => {
 
-        const data = `Product id -> ${product.id}\n
-                        Product name -> ${product.title}\n
-                        Product price -> ${product.price}\n`;
+        const data = `Product name -> ${product.title}\n
+                             Product price -> ${product.price}\n`;
 
         Swal.fire({
-            title: "QR Code",
+            title: product.title,
             imageUrl: 'https://api.qrserver.com/v1/create-qr-code/?data=' + data + '&amp;size=150x150',
             imageWidth: 200,
             imageHeight: 200,
