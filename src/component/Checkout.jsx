@@ -9,6 +9,7 @@ const Checkout = () => {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.handleCart);
     const { user } = useAuth0();
+    const [total, setTotal] = useState(0);
 
     // add all data to state
     const [data, setData] = useState({
@@ -110,8 +111,7 @@ const Checkout = () => {
             if (item.id === product.id) {
                 quantity = item.quantity;
             }
-        }
-        )
+        })
         return quantity;
     }
 
@@ -158,6 +158,44 @@ const Checkout = () => {
         }
     }
 
+    // generate coupon code with letters and numbers
+    const generateCouponCode = () => {
+        // let couponCode = '';
+        // let letters = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+        // let numbers = '123456789';
+        // for (let i = 0; i < 3; i++) {
+        //     couponCode += letters.charAt(Math.floor(Math.random() * letters.length));
+        //     couponCode += numbers.charAt(Math.floor(Math.random() * numbers.length));
+        // }
+        return 'A3P8B5';
+    }
+
+    // apply coupon code
+    const applyCoupon = () => {
+        if (data.couponCode === generateCouponCode()) {
+            showMessage('10% discount applied', 'success');
+            // check is already applied
+            if (data.couponCode !== '') {
+                showMessage('Coupon code already applied', 'warning');
+            }
+            setTotal(totalAmount() * 0.9);
+        } else {
+            showMessage('Coupon not applied', 'error');
+            setTotal(totalAmount());
+        }
+    }
+
+    // is coupon code applied
+    const isCouponApplied = () => {
+        if (data.couponCode === generateCouponCode()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     return (
 
         // creating checkout page
@@ -176,7 +214,7 @@ const Checkout = () => {
                                 <div className="col-12">
                                     <h3 className="text-center">
                                         <i className="fa fa-shopping-cart mx-2"></i>
-                                        Your Cart (total amount: {totalAmount().toFixed(2)}$)
+                                        Your Cart (total amount: {isCouponApplied() ? total.toFixed(2) : totalAmount()}$)
                                     </h3>
                                     <hr />
                                 </div>
@@ -254,8 +292,9 @@ const Checkout = () => {
                                             <div className="form-group mt-2">
                                                 <label><strong>Coupon Code</strong></label>
                                                 <div className="d-flex">
+                                                    {generateCouponCode()}
                                                     <input onChange={e => setData({ ...data, couponCode: e.target.value })} value={data.couponCode} type="text" className="form-control" />
-                                                    <button className="btn btn-outline-success mx-2">
+                                                    <button className="btn btn-outline-success mx-2" onClick={() => applyCoupon()}>
                                                         apply
                                                     </button>
                                                 </div>
