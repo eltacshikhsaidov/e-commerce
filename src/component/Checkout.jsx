@@ -213,19 +213,20 @@ const Checkout = () => {
                                             </h3>
                                             <hr />
                                             <div className="form-group">
-                                                <label>Full Name</label>
+                                                {/* add info for star */}
+                                                <label>* Full Name</label>
                                                 <input onChange={e => setData({ ...data, fullName: e.target.value })} value={data.fullName} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group mt-2">
-                                                <label>Email</label>
+                                                <label>* Email</label>
                                                 <input onChange={e => setData({ ...data, email: e.target.value })} value={data.email} type="email" className="form-control" />
                                             </div>
                                             <div className="form-group mt-2">
-                                                <label>Phone</label>
+                                                <label>* Phone</label>
                                                 <input onChange={e => setData({ ...data, phone: e.target.value })} value={data.phone} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group mt-2">
-                                                <label>Address</label>
+                                                <label>* Address</label>
                                                 <input onChange={e => setData({ ...data, address: e.target.value })} value={data.address} type="text" className="form-control" />
                                             </div>
 
@@ -237,15 +238,15 @@ const Checkout = () => {
                                             </h3>
                                             <hr />
                                             <div className="form-group">
-                                                <label htmlFor='cardNumber'>Card Number</label>
+                                                <label htmlFor='cardNumber'>* Card Number</label>
                                                 <input onChange={e => setData({ ...data, cardNumber: e.target.value })} value={data.cardNumber} type="text" className="form-control" id='cardNumber' />
                                             </div>
                                             <div className="form-group mt-2">
-                                                <label>Expiration Date</label>
+                                                <label>* Expiration Date</label>
                                                 <input onChange={e => setData({ ...data, cardExpiration: e.target.value })} value={data.cardExpiration} type="text" className="form-control" />
                                             </div>
                                             <div className="form-group mt-2">
-                                                <label>CVV</label>
+                                                <label>* CVV</label>
                                                 <input onChange={e => setData({ ...data, cardCvv: e.target.value })} value={data.cardCvv} type="text" className="form-control" />
                                             </div>
 
