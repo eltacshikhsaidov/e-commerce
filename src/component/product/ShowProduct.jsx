@@ -1,4 +1,3 @@
-import QRCode from "react-qr-code";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
