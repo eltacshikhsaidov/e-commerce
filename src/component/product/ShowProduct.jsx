@@ -66,6 +66,12 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
                 <NavLink to='/cart' className='btn btn-dark ms-2 px-3 py-2'>
                     Go to cart
                 </NavLink>
+
+                {/* add share button */}
+                <button className="btn btn-outline-dark ms-2 px-3 py-2">
+                    <i className="fa fa-share-alt"></i>
+                </button>
+
             </div>
 
         </div>
