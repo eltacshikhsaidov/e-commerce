@@ -5,6 +5,8 @@
   - Add to whishlist via like button
   - Share by QR code
   - Apply coupon code
+- 09/06/2020:
+  - Configured ```netlify.toml``` file to prevent to show default 404 page
 
 # Technologies
 
