@@ -17,6 +17,25 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
         })
     }
 
+    const showMessage = (message, icon) => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
+
     return (
         <>
             <div className="scroll-row buttons d-flex justify-content-center pb-5 mt-1">
@@ -58,6 +77,18 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                                 Buy now
                                             </button>
                                     }
+
+                                    {/* adding like button for every product */}
+                                    <button className="btn btn-outline-danger ml-2 mx-2" onClick={() => {
+                                        if (isAuthenticated) {
+                                            showMessage('Added to your wishlist', 'success');
+                                        }
+                                        else {
+                                            showLoginAlert();
+                                        }
+                                    }}>
+                                        <i className="fa fa-heart"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
