@@ -7,3 +7,6 @@
 /login /
 /logout /
 /register /
+
+<!-- redireact all pages to home page -->
+/[^/]* /
