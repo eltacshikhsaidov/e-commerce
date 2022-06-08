@@ -84,11 +84,11 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                     }
 
                                     {/* adding like button for every product */}
-                                    <button className="btn btn-outline-danger ml-2 mx-2" onClick={() => {
+                                    <button id={'like-' + product.id} className='btn btn-outline-danger ml-2 mx-2' onClick={() => {
                                         if (isAuthenticated) {
 
 
-
+                                            const likeButton = document.querySelector(`#like-${product.id}`);
                                             let click = 0;
 
                                             state.map((item) => {
@@ -108,13 +108,19 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                                 showMessage('Added to your wishlist', 'success');
                                                 dispatch(addProductToCart(product));
                                                 console.log('click from add to cart', click);
-                                                
+                                                likeButton.classList.remove('btn-outline-danger');
+                                                likeButton.classList.add('btn-danger');
+
                                             } else {
                                                 showMessage('Removed to your wishlist', 'info');
                                                 dispatch(deleteProductFromCart(product));
                                                 console.log('click from delete from cart', click);
-                                                
+                                                likeButton.classList.remove('btn-danger');
+                                                likeButton.classList.add('btn-outline-danger');
                                             }
+
+                                            // change color of current button on click
+
 
                                         }
                                         else {
