@@ -1,16 +1,9 @@
 # Redirects from what the browser requests to what we serve
 /home /
 / /
-/products /products
-/contact /contact
+/index.html /
+/index.htm /
 /about /about
 /login /
-/register /
 /logout /
-/profile /
-/cart /
-/checkout /
-/wishlist /
-/search /
-/product/:id /product/:id
-/* /
+/register /
