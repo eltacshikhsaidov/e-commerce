@@ -1,5 +1,7 @@
+import QRCode from "react-qr-code";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ShowProduct = ({ product, addProduct, removeProduct }) => {
 
@@ -8,6 +10,31 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
 
     const isProductInCart = (product) => {
         return state.find(item => item.id === product.id);
+    }
+
+    const generateQRCode = (product) => {
+
+        const data = `Product id -> ${product.id}\n
+                        Product name -> ${product.title}\n
+                        Product price -> ${product.price}\n`;
+
+        Swal.fire({
+            title: "QR Code",
+            imageUrl: 'https://api.qrserver.com/v1/create-qr-code/?data=' + data + '&amp;size=150x150',
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: "QR Code",
+            animation: false,
+            showConfirmButton: false,
+            showCloseButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            focusConfirm: false,
+            confirmButtonText: "",
+            confirmButtonAriaLabel: "",
+            confirmButtonColor: "",
+        });
     }
 
     const quantity = (product) => {
@@ -68,7 +95,7 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
                 </NavLink>
 
                 {/* add share button */}
-                <button className="btn btn-outline-dark ms-2 px-3 py-2">
+                <button className="btn btn-outline-dark ms-2 px-3 py-2" onClick={() => generateQRCode(product)}>
                     <i className="fa fa-share-alt"></i>
                 </button>
 
