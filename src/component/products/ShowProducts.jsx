@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
@@ -99,6 +99,8 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                                         click = item.numberOfClicks;
                                                     }
                                                 }
+
+                                                return click;
                                             })
 
 
@@ -108,7 +110,7 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                                 console.log('click from add to cart', click);
                                                 
                                             } else {
-                                                showMessage('Removed to your wishlist', 'success');
+                                                showMessage('Removed to your wishlist', 'info');
                                                 dispatch(deleteProductFromCart(product));
                                                 console.log('click from delete from cart', click);
                                                 
