@@ -26,7 +26,7 @@ const ShowProduct = ({ product, addProduct, removeProduct }) => {
             animation: false,
             showConfirmButton: false,
             showCloseButton: true,
-            allowOutsideClick: false,
+            allowOutsideClick: true,
             allowEscapeKey: false,
             allowEnterKey: false,
             focusConfirm: false,
