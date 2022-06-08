@@ -21,7 +21,7 @@ const Checkout = () => {
         cardNumber: '',
         cardExpiration: '',
         cardCvv: '',
-        cardZip: '',
+        couponCode: '',
         cart: state,
     });
 
@@ -64,7 +64,7 @@ const Checkout = () => {
             cardNumber: '',
             cardExpiration: '',
             cardCvv: '',
-            cardZip: '',
+            couponCode: '',
             cart: state,
         });
     }
@@ -151,7 +151,7 @@ const Checkout = () => {
 
     // disable button is input is empty
     const disableButton = () => {
-        if (data.fullName === '' || data.email === '' || data.phone === '' || data.address === '' || data.cardNumber === '' || data.cardExpiration === '' || data.cardCvv === '' || data.cardZip === '') {
+        if (data.fullName === '' || data.email === '' || data.phone === '' || data.address === '' || data.cardNumber === '' || data.cardExpiration === '' || data.cardCvv === '') {
             return true;
         } else {
             return false;
@@ -216,15 +216,15 @@ const Checkout = () => {
                                                 <label>Full Name</label>
                                                 <input onChange={e => setData({ ...data, fullName: e.target.value })} value={data.fullName} type="text" className="form-control" />
                                             </div>
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <label>Email</label>
                                                 <input onChange={e => setData({ ...data, email: e.target.value })} value={data.email} type="email" className="form-control" />
                                             </div>
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <label>Phone</label>
                                                 <input onChange={e => setData({ ...data, phone: e.target.value })} value={data.phone} type="text" className="form-control" />
                                             </div>
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <label>Address</label>
                                                 <input onChange={e => setData({ ...data, address: e.target.value })} value={data.address} type="text" className="form-control" />
                                             </div>
@@ -240,19 +240,26 @@ const Checkout = () => {
                                                 <label htmlFor='cardNumber'>Card Number</label>
                                                 <input onChange={e => setData({ ...data, cardNumber: e.target.value })} value={data.cardNumber} type="text" className="form-control" id='cardNumber' />
                                             </div>
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <label>Expiration Date</label>
                                                 <input onChange={e => setData({ ...data, cardExpiration: e.target.value })} value={data.cardExpiration} type="text" className="form-control" />
                                             </div>
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <label>CVV</label>
                                                 <input onChange={e => setData({ ...data, cardCvv: e.target.value })} value={data.cardCvv} type="text" className="form-control" />
                                             </div>
-                                            {/* billing zip code */}
-                                            <div className="form-group">
-                                                <label>Billing Zip Code</label>
-                                                <input onChange={e => setData({ ...data, cardZip: e.target.value })} value={data.cardZip} type="text" className="form-control" />
+
+                                            {/* coupon code */}
+                                            <div className="form-group mt-2">
+                                                <label><strong>Coupon Code</strong></label>
+                                                <div className="d-flex">
+                                                    <input onChange={e => setData({ ...data, couponCode: e.target.value })} value={data.couponCode} type="text" className="form-control" />
+                                                    <button className="btn btn-outline-success mx-2">
+                                                        apply
+                                                    </button>
+                                                </div>
                                             </div>
+
                                         </div>
                                         {/* creating order button */}
                                         <div className="d-flex justify-content-center mt-4">
