@@ -16,12 +16,14 @@ const handleCart = (state = cart, action) => {
                 return state.map(item => {
                     if (item.id === product.id) {
                         item.quantity += 1;
+                        item.numberOfClicks += 1;
                     }
+
                     return item;
                 });
             } else {
                 // If product does not exist, add it to cart
-                return [...state, { ...product, quantity: 1 }];
+                return [...state, { ...product, quantity: 1, numberOfClicks: 1 }];
             }
         case actionTypes.REMOVE_FROM_CART:
             // Check if product exists in cart
@@ -32,6 +34,7 @@ const handleCart = (state = cart, action) => {
                 return state.map(item => {
                     if (item.id === product.id) {
                         item.quantity -= 1;
+                        item.numberOfClicks += 1;
                     }
                     return item;
                 }

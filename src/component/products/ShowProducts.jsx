@@ -1,11 +1,16 @@
 import { NavLink } from "react-router-dom";
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
+import { addProductToCart, deleteProductFromCart } from "../../redux/action/listActions";
 
 const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
 
     const { isAuthenticated } = useAuth0();
+    const dispatch = useDispatch();
+
+    const state = useSelector(state => state.handleCart);
 
     const showLoginAlert = () => {
         Swal.fire({
@@ -81,7 +86,34 @@ const ShowProducts = ({ data, setFilter, filterProduct, filter }) => {
                                     {/* adding like button for every product */}
                                     <button className="btn btn-outline-danger ml-2 mx-2" onClick={() => {
                                         if (isAuthenticated) {
-                                            showMessage('Added to your wishlist', 'success');
+
+
+
+                                            let click = 0;
+
+                                            state.map((item) => {
+                                                if (item.id === product.id) {
+                                                    if (click % 2 === 0) {
+                                                        click = item.numberOfClicks;
+                                                    } else {
+                                                        click = item.numberOfClicks;
+                                                    }
+                                                }
+                                            })
+
+
+                                            if (click % 2 === 0) {
+                                                showMessage('Added to your wishlist', 'success');
+                                                dispatch(addProductToCart(product));
+                                                console.log('click from add to cart', click);
+                                                
+                                            } else {
+                                                showMessage('Removed to your wishlist', 'success');
+                                                dispatch(deleteProductFromCart(product));
+                                                console.log('click from delete from cart', click);
+                                                
+                                            }
+
                                         }
                                         else {
                                             showLoginAlert();
