@@ -47,6 +47,7 @@ code {
 
 }
 
+/* Fixed position for share button */
 .fixed-card {
   position: relative;
 }
@@ -57,3 +58,4 @@ code {
   right: 5px;
   display: block;
 }
+/* end */
