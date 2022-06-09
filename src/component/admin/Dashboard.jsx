@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFeedback, removeFromCheckout } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
+import Users from './Users';
 
 const Dashboard = () => {
 
@@ -285,7 +286,7 @@ const Dashboard = () => {
                                     <div className='columns'>
                                         <div className='column'>
                                             <h5>
-                                                Role <button className='btn btn-sm btn-info mx-3'>ADMIN</button>
+                                                Role <button className='btn btn-sm btn-success mx-3'>ADMIN</button>
                                             </h5>
                                             <div className='d-flex m-3'>
                                                 <p className='m-2'>
@@ -308,6 +309,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
+                    <Users />
                 </div>
 
                 {/* Show all feedbacks */}
