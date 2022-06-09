@@ -23,6 +23,7 @@ const Checkout = () => {
         cardExpiration: '',
         cardCvv: '',
         couponCode: '',
+        total: 0,
         cart: state,
     });
 
@@ -66,6 +67,7 @@ const Checkout = () => {
             cardExpiration: '',
             cardCvv: '',
             couponCode: '',
+            total: 0,
             cart: state,
         });
     }
@@ -120,6 +122,8 @@ const Checkout = () => {
         state.forEach(item => {
             amount += item.price * item.quantity;
         })
+
+        data.total = amount;
         return amount;
     }
 
@@ -174,6 +178,7 @@ const Checkout = () => {
         if (data.couponCode === generateCouponCode()) {
             showMessage('10% discount applied', 'success');
             setTotal(totalAmount() * 0.9);
+            data.total = totalAmount() * 0.9;
 
         } else {
             showMessage('Coupon code is not valid', 'error');
