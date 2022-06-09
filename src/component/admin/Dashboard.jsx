@@ -247,7 +247,7 @@ const Dashboard = () => {
                                     <div className='columns'>
                                         <div className='column'>
                                             <h5>
-                                                Role <button className='btn btn-sm btn-success mx-3'>ADMIN</button>
+                                                Role <button className='btn btn-sm btn-warning mx-3'>ADMIN</button>
                                             </h5>
                                             <div className='d-flex m-3'>
                                                 <p className='m-2'>
