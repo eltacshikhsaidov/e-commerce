@@ -33,7 +33,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white py-3 shadow-sm">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white py-3 shadow-sm fixed-top">
 
                 {/* <a className="navbar-brand" href="#">eStore</a> */}
                 <NavLink className={'navbar-brand mx-2'} to='/'>
