@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFeedback, removeFromCheckout } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const [totalUsers, setTotalUsers] = useState(0);
     const [totalProducts, setTotalProducts] = useState(0);
+    const [totalVisitors, setTotalVisitors] = useState(0);
 
     // orders
     const ordersState = useSelector((state) => state.handleCheckout);
@@ -135,10 +136,25 @@ const Dashboard = () => {
             .catch(err => console.log(err));
     }
 
-    
+    const getTotalVisitors = () => {
+        //  I used count api to get total visitors https://api.countapi.xyz/hit/mysite.com/visits
+        fetch('https://api.countapi.xyz/hit/e-commerce-az.netlify.app/visits')
+            .then(res => res.json())
+            .then(data => {
+                setTotalVisitors(data.value);
+            })
+            .catch(err => console.log(err));
 
-    getTotalUsers();
-    getTotalProducts();
+    }
+
+
+    useEffect(() => {
+
+        getTotalUsers();
+        getTotalProducts();
+        getTotalVisitors();
+
+    }, []);
 
 
 
@@ -225,7 +241,7 @@ const Dashboard = () => {
                                 <p className='card-text'>
                                     {/* get total users from database */}
                                     {/* display total users */}
-                                    12900
+                                    {totalVisitors}
                                 </p>
                             </div>
                             <div className="column my-1 mx-auto">
