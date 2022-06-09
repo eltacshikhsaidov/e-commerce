@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeFeedback, removeFromCheckout } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
 import Users from './Users';
+import Products from './Products';
 
 const Dashboard = () => {
 
@@ -213,47 +214,7 @@ const Dashboard = () => {
                 {/* show all availabel products */}
                 <div className='col-md-12 mt-5'>
                     <h3>Available Products</h3>
-                    <div id="accordion">
-                        <div className="card">
-                            <div className="card-header" id="headingOne">
-                                <h5 className="mb-0">
-                                    <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Product Title, quantity
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div className="card-body">
-                                    {/* create row with product details */}
-                                    <div className='columns'>
-                                        <div className='column'>
-                                            <h5>
-                                                Product Title <button className='btn btn-sm btn-info mx-3'>Available</button>
-                                                <button className='btn btn-sm btn-warning mx-3'>Quantity: 1</button>
-                                            </h5>
-                                            <div className='d-flex'>
-                                                <p className='m-2'>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                    Aperiam, doloremque, ea.
-                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore, asperiores. Aspernatur voluptates beatae quos recusandae, id neque omnis error optio aliquid obcaecati vero. Veniam, veritatis doloribus laborum totam eveniet odio!
-
-                                                </p>
-                                                <img src='https://via.placeholder.com/150' alt='product' />
-                                            </div>
-                                            {/* product is available */}
-                                            <div className='d-flex'>
-                                                <button className='btn btn-sm btn-success mx-3'>update</button>
-                                                <button className='btn btn-sm btn-danger mx-3'>remove</button>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Products />
                 </div>
 
                 {/* show all orders */}
