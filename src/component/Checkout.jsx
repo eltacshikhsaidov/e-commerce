@@ -176,7 +176,7 @@ const Checkout = () => {
             setTotal(totalAmount() * 0.9);
 
         } else {
-            showMessage('Coupon not applied', 'error');
+            showMessage('Coupon code is not valid', 'error');
             setTotal(totalAmount());
         }
     }
