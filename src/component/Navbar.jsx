@@ -12,6 +12,13 @@ const Navbar = () => {
     const { logout } = useAuth0();
     const { user } = useAuth0();
 
+    // count clicks to toggle button
+    const [clicks, setClicks] = React.useState(0);
+
+    const handleClick = () => {
+        setClicks(clicks + 1);
+    }
+
     const state = useSelector((state) => state.handleCart);
 
     console.log(state);
@@ -41,8 +48,10 @@ const Navbar = () => {
                     <span>eStore</span>
                 </NavLink>
 
-                <button className="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <button onClick={() => handleClick()} className="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    
+                    {clicks % 2 === 0 ? <span className="fa fa-bars"></span> : <span className="fa fa-close"></span>}
+                    
                 </button>
                 <div className="collapse navbar-collapse px-3" id="navbarNav">
                     <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
