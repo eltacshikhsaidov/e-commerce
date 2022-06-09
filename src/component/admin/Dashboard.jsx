@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFeedback, removeFromCheckout } from '../../redux/action/listActions';
 import Swal from 'sweetalert2';
@@ -9,6 +9,8 @@ const Dashboard = () => {
 
     const state = useSelector((state) => state.handleFeedback);
     const dispatch = useDispatch();
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [totalProducts, setTotalProducts] = useState(0);
 
     // orders
     const ordersState = useSelector((state) => state.handleCheckout);
@@ -62,7 +64,7 @@ const Dashboard = () => {
     const orderedProducts = (orderedProduct) => {
         return (
             <h5 key={orderedProduct.id}>
-                {orderedProduct.title.substring(0, 15)+'...'}
+                {orderedProduct.title.substring(0, 15) + '...'}
                 <button className='btn btn-sm btn-warning mx-3'>Quantity: {orderedProduct.quantity}</button>
             </h5>
         );
@@ -115,6 +117,29 @@ const Dashboard = () => {
     }
 
 
+    const getTotalUsers = () => {
+        fetch('https://fakestoreapi.com/users')
+            .then(res => res.json())
+            .then(data => {
+                setTotalUsers(data.length);
+            })
+            .catch(err => console.log(err));
+    }
+
+    const getTotalProducts = () => {
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(data => {
+                setTotalProducts(data.length);
+            })
+            .catch(err => console.log(err));
+    }
+
+    
+
+    getTotalUsers();
+    getTotalProducts();
+
 
 
     const showMessage = (message, icon) => {
@@ -143,7 +168,7 @@ const Dashboard = () => {
                                 <p className='card-text'>
                                     {/* get total users from database */}
                                     {/* display total users */}
-                                    12900
+                                    {totalUsers}
                                 </p>
                             </div>
                             <div className="column my-1 mx-auto">
@@ -181,7 +206,7 @@ const Dashboard = () => {
                                 <p className='card-text'>
                                     {/* get total users from database */}
                                     {/* display total users */}
-                                    12900
+                                    {totalProducts}
                                 </p>
                             </div>
                             <div className="column my-1 mx-auto">
