@@ -10,6 +10,27 @@ const Checkout = () => {
     const state = useSelector((state) => state.handleCart);
     const { user } = useAuth0();
     const [total, setTotal] = useState(0);
+    
+
+    // JUST FOR TESTING PURPOSE
+    const [position, setPosition] = useState([0, 0]);
+
+    const getMyPosition = () => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setPosition([latitude, longitude]);
+        });
+    }
+
+    // update position every millisecond
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            // update position every millisecond
+            console.log('update position');
+            getMyPosition();
+        }, 300);
+        return () => clearInterval(interval);
+    }, []);
 
     // add all data to state
     const [data, setData] = useState({
@@ -44,7 +65,7 @@ const Checkout = () => {
                 Swal.fire({
                     // show the map
                     title: 'Courier track',
-                    html: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.865010982409!2d106.7641833142898!3d-6.239959794909814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4f8f8f8f8f7%3A0x8f8f8f8f8f8f8f8f!2sJl.+Kartini+No.1%2C+Kec.+Cipadung%2C+Kota+Bandung%2C+Jawa+Barat+40351!5e0!3m2!1sid!2sid!4v1569240981250!5m2!1sid!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>',
+                    html: position + '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.865010982409!2d106.7641833142898!3d-6.239959794909814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4f8f8f8f8f7%3A0x8f8f8f8f8f8f8f8f!2sJl.+Kartini+No.1%2C+Kec.+Cipadung%2C+Kota+Bandung%2C+Jawa+Barat+40351!5e0!3m2!1sid!2sid!4v1569240981250!5m2!1sid!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>',
                     showConfirmButton: false,
                     showCancelButton: true,
                     cancelButtonText: 'Close',

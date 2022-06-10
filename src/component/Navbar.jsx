@@ -49,9 +49,9 @@ const Navbar = () => {
                 </NavLink>
 
                 <button onClick={() => handleClick()} className="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    
+
                     {clicks % 2 === 0 ? <span className="fa fa-bars"></span> : <span className="fa fa-close"></span>}
-                    
+
                 </button>
                 <div className="collapse navbar-collapse px-3" id="navbarNav">
                     <ul className="navbar-nav mx-auto mb-2 mb-lg-0">

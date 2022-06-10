@@ -14,6 +14,7 @@ import Dashboard from './component/admin/Dashboard';
 import Footer from './component/Footer';
 import { useAuth0 } from '@auth0/auth0-react';
 import NotFound from './component/NotFound';
+import Map from './component/map/Map';
 
 function App() {
 
